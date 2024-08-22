@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-import featuresSplitI from "@/assets/images/features-split-image-01.png";
-import featuresSplitII from "@/assets/images/features-split-image-02.png";
-import featuresSplitIII from "@/assets/images/features-split-image-03.png";
+import featuresSplitI from "@/assets/images/placeholder.png";
+import featuresSplitII from "@/assets/images/placeholder.png";
+import featuresSplitIII from "@/assets/images/placeholder.png";
 
 export default function Details() {
     return (

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import vid from "@/assets/images/placeholder.png";
+import img from "@/assets/images/placeholder.png";
 
 export default function Hero() {
     return (
@@ -15,7 +15,7 @@ export default function Hero() {
             <div className="flex flex-col justify-center max-w-xs mx-auto mb-12 sm:max-w-full sm:flex-row">
                 <Link
                     className="w-full mb-4 whitespace-no-wrap bg-indigo-600 btn btn-tall md:w-auto hover:bg-indigo-500 sm:mr-2"
-                    href="/createcontact"
+                    href="/register"
                 >
                     Get Started
                 </Link>
@@ -28,7 +28,7 @@ export default function Hero() {
             </div>
             <div className="mb-16">
                 <Image
-                    src={vid}
+                    src={img}
                     className="block w-full max-w-5xl mx-auto rounded"
                     alt=""
                 />
