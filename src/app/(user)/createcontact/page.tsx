@@ -25,7 +25,7 @@ const CreateContact = () => {
         }
     }, [error]);
 
-
+// Function to handle the http response from the createContactHttpRequest HTTP request
     const createContactRequestResponse = (res: HttpResponseData) => {
         const { status } = res;
 
@@ -39,6 +39,7 @@ const CreateContact = () => {
     const handleFormSubmit = (formData: Contacts) => {
         const { firstName, lastName, phoneNumber } = formData;
 
+        //Send HTTP request for contact creation
         createContactHttpRequest({
             url: "contact",
             method: "POST",
@@ -49,6 +50,7 @@ const CreateContact = () => {
                 phoneNumber
             }
         },
+        // Callback function to handle the response.
             createContactRequestResponse
         )
 

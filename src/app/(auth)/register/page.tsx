@@ -14,6 +14,7 @@ import useHttp from "@/hooks/useHttp";
 const Register = () => {
     const router = useRouter();
 
+    // Destructure properties from custom HTTP hook.
     const { isLoading, error, sendHttpRequest: signUpHttpRequest } = useHttp();
 
     useEffect(() => {
@@ -22,6 +23,7 @@ const Register = () => {
         }
     }, [error]);
 
+    // Function to handle the http response from the signup(signUpHttpRequest()) HTTP request
     const signUpRequestResponse = (res: HttpResponseData) => {
         const { status } = res;
 
@@ -36,6 +38,7 @@ const Register = () => {
     const handleSubmit = (formData: AuthContactForm) => {
         const { password, confirmPassword, userName } = formData;
 
+        // Send the HTTP request to the signup endpoint
         signUpHttpRequest({
             url: "signup",
             method: "POST",
@@ -45,6 +48,7 @@ const Register = () => {
                 userName
             }
         },
+        // Callback function to handle the response.
             signUpRequestResponse
         )
     };

@@ -20,8 +20,10 @@ const Page: React.FC<PageProps> = ({ params }) => {
 
   const router = useRouter();
 
-  const { isLoading: detailsIsLoading, error: detailsError, sendHttpRequest: contactDettailsHttpRequest } = useHttp();
+  // Destructure properties from custom HTTP hook.
+  const { isLoading: detailsIsLoading, error: detailsError, sendHttpRequest: contactDetailsHttpRequest } = useHttp();
 
+  // Destructure properties from custom HTTP hook.
   const { isLoading: deleteContactIsLoading, error: deleteContactError, sendHttpRequest: deleteContactHttpRequest } = useHttp();
 
   useEffect(() => {
@@ -45,14 +47,13 @@ const Page: React.FC<PageProps> = ({ params }) => {
       setInitialPageLoad(false)
     }
 
+    // Function to handle the http response from the contactDettailsHttpRequest() HTTP request
     const myResponse = (res: HttpResponseData) => {
       const { data, status } = res;
 
       if (status === HttpEnum.SUCCESS) {
 
         toast.success("Contact details fetched successfully!");
-
-        console.log(data);
 
         const formattedContacts: Contacts = {
           _id: data._id,
@@ -66,18 +67,21 @@ const Page: React.FC<PageProps> = ({ params }) => {
       };
     };
 
-    contactDettailsHttpRequest(
+    // Send the HTTP request to the fetch a specific contact details with it's ID on page load
+    contactDetailsHttpRequest(
       {
         url: `contact/${contactId}`,
         token: token,
       },
+      // Callback function to handle the response.
       myResponse
     );
 
-  }, [contactDettailsHttpRequest, token]);
+  }, [contactDetailsHttpRequest, token]);
 
 
 
+  // Function to handle the http response from the handleContactDelete() HTTP request
   const dleteContactRequestResponse = (res: HttpResponseData) => {
     const { status } = res;
 
@@ -90,11 +94,13 @@ const Page: React.FC<PageProps> = ({ params }) => {
 
   const handleContactDelete = (_id?: string) => {
 
+    // Send HTTP request to the delete contact
     deleteContactHttpRequest({
       url: `contact/${_id}`,
       method: "DELETE",
       token
     },
+    // Callback function to handle the response.
       dleteContactRequestResponse
     )
   }

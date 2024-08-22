@@ -20,8 +20,10 @@ const Page: React.FC<PageProps> = ({ params }) => {
 
     const router = useRouter();
 
-    const { isLoading: detailsIsLoading, error: detailsError, sendHttpRequest: contactDettailsHttpRequest } = useHttp();
+    // Destructure properties from custom HTTP hook.
+    const { isLoading: detailsIsLoading, error: detailsError, sendHttpRequest: contactDetailsHttpRequest } = useHttp();
 
+    // Destructure properties from custom HTTP hook.
     const { isLoading: editContactIsLoading, error: editContactError, sendHttpRequest: editContactHttpRequest } = useHttp();
 
     useEffect(() => {
@@ -45,6 +47,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
             setInitialPageLoad(false)
         }
 
+        // Function to handle the http response from the contactDetailsHttpRequest() HTTP request
         const myResponse = (res: HttpResponseData) => {
             const { data, status } = res;
 
@@ -66,17 +69,19 @@ const Page: React.FC<PageProps> = ({ params }) => {
             };
         };
 
-        contactDettailsHttpRequest(
+        // Send the HTTP request to the fetch a specific contact details with it's ID on page load
+        contactDetailsHttpRequest(
             {
                 url: `contact/${contactId}`,
                 token: token,
             },
+            // Callback function to handle the response.
             myResponse
         );
 
-    }, [contactDettailsHttpRequest, token]);
+    }, [contactDetailsHttpRequest, token]);
 
-
+    // Function to handle the http response from the editContactHttpRequest() HTTP request
     const editContactRequestResponse = (res: HttpResponseData) => {
         const { status } = res;
 
@@ -90,6 +95,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
     const handleFormSubmit = (formData: Contacts) => {
         const { firstName, lastName, phoneNumber } = formData;
 
+        // Send HTTP request to the edit contact
         editContactHttpRequest({
             url: `contact/${contactId}`,
             method: "PATCH",
@@ -100,6 +106,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
                 phoneNumber
             }
         },
+        // Callback function to handle the response.
             editContactRequestResponse
         )
     }

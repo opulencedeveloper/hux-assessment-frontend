@@ -18,6 +18,7 @@ export default function ContactsInfo() {
 
     const [initialPageLoad, setInitialPageLoad] = useState(true);
 
+    // Destructure properties from custom HTTP hook.
     const { isLoading, error, sendHttpRequest: fetchContactsHttpRequest } = useHttp();
 
     useEffect(() => {
@@ -37,6 +38,7 @@ export default function ContactsInfo() {
             setInitialPageLoad(false);
         }
 
+        // Function to handle the http response from the fetchContactsHttpRequest() HTTP request
         const myResponse = (res: HttpResponseData) => {
             const { data, status } = res;
 
@@ -53,16 +55,19 @@ export default function ContactsInfo() {
             };
         };
 
+        // Send the HTTP request to the fetch a all contacts on page load
         fetchContactsHttpRequest(
             {
                 url: "contacts",
                 token: token,
             },
+            // Callback function to handle the response.
             myResponse
         );
 
     }, [fetchContactsHttpRequest, token]);
 
+    //Function for handling navigation to the contact details screen
     const handleCardClick = (_id?: string) => {
         router.push(`/contact/${_id}`);
 

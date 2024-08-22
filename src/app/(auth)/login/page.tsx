@@ -15,7 +15,7 @@ const Login = () => {
     const router = useRouter(); 
 
      // Destructure properties from custom HTTP hook.
-    const { isLoading, error, sendHttpRequest: signUpHttpRequest } = useHttp();
+    const { isLoading, error, sendHttpRequest: signInHttpRequest } = useHttp();
 
     const authContext = useContext(AuthContext);
 
@@ -25,8 +25,8 @@ const Login = () => {
         }
     }, [error]);
 
-    // Function to handle the http response from the signup(signUpHttpRequest()) HTTP request
-    const signUpRequestResponse = (res: HttpResponseData) => {
+    // Function to handle the http response from the signup(signInHttpRequest()) HTTP request
+    const signInRequestResponse = (res: HttpResponseData) => {
         const { status, data } = res;
 
         if (status === HttpEnum.SUCCESS) {
@@ -41,8 +41,8 @@ const Login = () => {
     const handleSubmit = (formData: AuthContactForm) => {
         const { password, userName } = formData;
 
-        // Send the HTTP request to the signup endpoint
-        signUpHttpRequest({
+        // Send the HTTP request to the signin endpoint
+        signInHttpRequest({
             url: "signin",
             method: "POST",
             body: {
@@ -51,7 +51,7 @@ const Login = () => {
             }
         },
         // Callback function to handle the response.
-            signUpRequestResponse
+            signInRequestResponse
         )
     };
 
