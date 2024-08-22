@@ -14,10 +14,11 @@ const useHttp = () => {
 
   const authContext = useContext(AuthContext);
 
+   // Function to send an HTTP request, using useCallback to prevent unnecessary re-creations of the function.
   const sendHttpRequest = useCallback(
     async (
       requestConfig: RequestConfigType,
-      applyData: (data: any) => void
+      applyData: (data: any) => void // Callback function to handle the response data.
     ) => {
       setIsLoading(true);
 
@@ -25,14 +26,14 @@ const useHttp = () => {
 
       try {
         const response = await fetch(`https://hux-assessment-backend-production.up.railway.app/api/v1/${requestConfig.url}`, {
-          method: requestConfig.method ? requestConfig.method : "GET",
+          method: requestConfig.method ? requestConfig.method : "GET", // Use provided method or default to GET.
           headers: {
             "Content-Type": requestConfig.contentType
               ? requestConfig.contentType
-              : "application/json",
+              : "application/json", // Set content type header, defaulting to JSON.
             Authorization: requestConfig.token
               ? `Bearer ${requestConfig.token}`
-              : "",
+              : "", // Include Authorization header if a token is provided.
           },
           body: JSON.stringify(requestConfig.body),
         });
@@ -40,10 +41,9 @@ const useHttp = () => {
         let responseData: HttpResponseData = await response.json();
 
         if (response.ok) {
+          // If the response is OK, apply the data using the provided callback.
           applyData(responseData);
         } else if (response.status === 401) {
-          toast.error("Invalid Token!");
-
           authContext.logout();
 
           router.push("/");
@@ -66,6 +66,7 @@ const useHttp = () => {
         setIsLoading(false);
       }
     },
+    // Empty dependency array ensures useCallback only creates this function once per component lifecycle.
     []
   );
 

@@ -14,7 +14,6 @@ export default function Details() {
                 Our contact management system is built to enhance your workflow, allowing you to manage your contacts efficiently and effectively with minimal effort.
             </p>
 
-            {/* First Feature Section */}
             <div className="flex flex-col mb-8 sm:flex-row">
                 <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12 sm:order-last">
                     <Image
@@ -39,7 +38,6 @@ export default function Details() {
                 </div>
             </div>
 
-            {/* Second Feature Section */}
             <div className="flex flex-col mb-8 sm:flex-row">
                 <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12">
                     <Image
@@ -64,7 +62,6 @@ export default function Details() {
                 </div>
             </div>
 
-            {/* Third Feature Section */}
             <div className="flex flex-col mb-8 sm:flex-row">
                 <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12">
                     <Image
